@@ -1,12 +1,13 @@
 import React from 'react'
 import MainCarousel from '../../components/HomeCarousel/MainCarousel'
+import DhoopCarousel from '../../components/DhoopCarousel/DhoopCarousel'
 
 const HomePage = () => {
   return (
     <div>
         <MainCarousel />
         <div>
-            other section
+            <DhoopCarousel /> 
         </div>
     </div>
   )
