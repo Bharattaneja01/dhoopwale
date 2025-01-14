@@ -6,7 +6,10 @@ const HomePage = () => {
   return (
     <div>
         <MainCarousel />
-        <div>
+        <div className='px-5 lg:px-10 space-y-10 py-20 flex flex-col justify-center'>
+            <DhoopCarousel /> 
+            <DhoopCarousel /> 
+            <DhoopCarousel /> 
             <DhoopCarousel /> 
         </div>
     </div>
