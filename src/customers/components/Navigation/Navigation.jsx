@@ -387,7 +387,7 @@ export default function Navigation() {
                           cursor: "pointer",
                         }}
                       >
-                        R
+                        B
                       </Avatar>
                       <Menu
                         id="basic-menu"
