@@ -4,6 +4,11 @@
 import { useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { Radio, RadioGroup } from '@headlessui/react'
+import Rating from '@mui/material/Rating';
+import { Box, Button, Grid, LinearProgress } from '@mui/material';
+import ProductReviewCard from './ProductReviewCard';
+import { mens_kurta } from '../../../Data/mens_kurta';
+import HomeSectionCard from '../HomeSectionCard/HomeSectionCard';
 
 const product = {
     name: 'Basic Tee 6-Pack',
@@ -37,14 +42,10 @@ const product = {
         { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
     ],
     sizes: [
-        { name: 'XXS', inStock: false },
-        { name: 'XS', inStock: true },
         { name: 'S', inStock: true },
         { name: 'M', inStock: true },
         { name: 'L', inStock: true },
         { name: 'XL', inStock: true },
-        { name: '2XL', inStock: true },
-        { name: '3XL', inStock: true },
     ],
     description:
         'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
@@ -68,7 +69,7 @@ export default function ProductDetails() {
     const [selectedSize, setSelectedSize] = useState(product.sizes[2])
 
     return (
-        <div className="bg-white">
+        <div className="bg-white lg:px-20">
             <div className="pt-6">
                 <nav aria-label="Breadcrumb">
                     <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -98,6 +99,7 @@ export default function ProductDetails() {
                         </li>
                     </ol>
                 </nav>
+
                 <section className='grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-10 px-4 pt-10'>
                     {/* Image gallery */}
                     <div className="flex flex-col items-center">
@@ -121,7 +123,7 @@ export default function ProductDetails() {
                         </div>
                     </div>
                     {/* Product info */}
-                    <div className="lg:col-span-1 max-auto max-w-2xl px-4 pb-16 sm:px-6 lg:max-w-7xl lg:px-8 lg:pb-24">
+                    <div className="lg:col-span-0 max-auto max-w-2xl px-4 pb-16 sm:px-6 lg:max-w-2xl lg:px-8 lg:pb-24 items-start">
                         <div className="lg:col-span-2">
                             <h1 className="text-lg font-semibold lg:text-xl text-gray-900">Universaloutfit</h1>
                             <h1 className="text-lg lg:text-xl opacity-60 pt-1 text-gray-900">Casual Puff Sleeves Solid Women White Top</h1>
@@ -130,58 +132,23 @@ export default function ProductDetails() {
                         {/* Options */}
                         <div className="mt-4 lg:row-span-3 lg:mt-0">
                             <h2 className="sr-only">Product information</h2>
-                            <p className="text-3xl tracking-tight text-gray-900">{product.price}</p>
 
-                            {/* Reviews */} 
+                            <div className='flex space-x-5 text-lg items-center lg:text-xl text-gray-900 mt-6'>
+                                <p className='font-semibold'>Rs.199</p>
+                                <p className='line-through opacity-50'>Rs.299</p>
+                                <p className='font-semibold text-green-600'>33% Off</p>
+                            </div>
+
+                            {/* Reviews */}
                             <div className="mt-6">
-                                <h3 className="sr-only">Reviews</h3>
-                                <div className="flex items-center">
-                                    <div className="flex items-center">
-                                        {[0, 1, 2, 3, 4].map((rating) => (
-                                            <StarIcon
-                                                key={rating}
-                                                aria-hidden="true"
-                                                className={classNames(
-                                                    reviews.average > rating ? 'text-gray-900' : 'text-gray-200',
-                                                    'size-5 shrink-0',
-                                                )}
-                                            />
-                                        ))}
-                                    </div>
-                                    <p className="sr-only">{reviews.average} out of 5 stars</p>
-                                    <a href={reviews.href} className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                                        {reviews.totalCount} reviews
-                                    </a>
+                                <div className='flex items-center space-x-6  '>
+                                <Rating name="read-only" value={3.5} readOnly />
+                                <p className='opacity-50 text-sm'>3536 Ratings</p>
+                                <p className='ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500'>2252 Reviews</p>
                                 </div>
                             </div>
 
                             <form className="mt-10">
-                                {/* Colors */}
-                                <div>
-                                    <h3 className="text-sm font-medium text-gray-900">Color</h3>
-
-                                    <fieldset aria-label="Choose a color" className="mt-4">
-                                        <RadioGroup value={selectedColor} onChange={setSelectedColor} className="flex items-center gap-x-3">
-                                            {product.colors.map((color) => (
-                                                <Radio
-                                                    key={color.name}
-                                                    value={color}
-                                                    aria-label={color.name}
-                                                    className={classNames(
-                                                        color.selectedClass,
-                                                        'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none data-[checked]:ring-2 data-[focus]:data-[checked]:ring data-[focus]:data-[checked]:ring-offset-1',
-                                                    )}
-                                                >
-                                                    <span
-                                                        aria-hidden="true"
-                                                        className={classNames(color.class, 'size-8 rounded-full border border-black/10')}
-                                                    />
-                                                </Radio>
-                                            ))}
-                                        </RadioGroup>
-                                    </fieldset>
-                                </div>
-
                                 {/* Sizes */}
                                 <div className="mt-10">
                                     <div className="flex items-center justify-between">
@@ -235,13 +202,13 @@ export default function ProductDetails() {
                                         </RadioGroup>
                                     </fieldset>
                                 </div>
+                                <div className='pt-4'>
 
-                                <button
-                                    type="submit"
-                                    className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                >
-                                    Add to bag
-                                </button>
+                                    <Button variant='contained' sx={{px:"10rem",py:"0.7rem",bgcolor:"#9155fd"}}>
+                                    
+                                        Add to cart
+                                    </Button>
+                                </div>
                             </form>
                         </div>
 
@@ -279,7 +246,77 @@ export default function ProductDetails() {
                         </div>
                     </div>
                 </section>
+                    {/* Ratings and Reviews */}
+                <section>
+                    <h1 className='font-semibold text-lg pb-4'>Recent Reviews And Ratings</h1>
+                    <div className='border p-5'>
+                        <Grid container spacing={7}>
+                            <Grid item xs={7}>
+                                <div className='space-y-5'>
+                                   {[1,1].map((item)=> <ProductReviewCard />)}        
+                                </div>
+                            </Grid>
 
+
+                            <Grid item xs={5}>
+                                <h1 className='text-xl font-semibold pb-1'>Product Ratings</h1>
+                                <div className='flex items-center space-x-3'>
+                                <Rating value={4.5} name='half-rating' readOnly precision={.5}/>
+                                <p className='opacity-60'>63638 Ratings</p>
+                                </div>
+                                <Box className="mt-5 space-y-3">
+                                    <Grid container alignItems="center" gap={2}>
+                                        <Grid item xs={2}>
+                                            <p>Excellent</p>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <LinearProgress sx={{bgcolor:"#d0d0d0",borderRadius:4,height:7}} variant='determinate' value={40} color='success'/>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container alignItems="center" gap={2}>
+                                        <Grid item xs={2}>
+                                            <p>Very Good</p>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <LinearProgress sx={{bgcolor:"#d0d0d0",borderRadius:4,height:7}} variant='determinate' value={30} color='success'/>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container alignItems="center" gap={2}>
+                                        <Grid item xs={2}>
+                                            <p>Good</p>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <LinearProgress sx={{bgcolor:"#d0d0d0",borderRadius:4,height:7}} variant='determinate' value={25} color='success'/>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container alignItems="center" gap={2}>
+                                        <Grid item xs={2}>
+                                            <p>Average</p>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <LinearProgress sx={{bgcolor:"#d0d0d0",borderRadius:4,height:7}} variant='determinate' value={20} color='warning'/>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container alignItems="center" gap={2}>
+                                        <Grid item xs={2}>
+                                            <p>Poor</p>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <LinearProgress sx={{bgcolor:"#d0d0d0",borderRadius:4,height:7}} variant='determinate' value={10} color='error'/>
+                                        </Grid>
+                                    </Grid>
+                                </Box>
+                            </Grid>
+                        </Grid>
+                    </div>
+                </section>
+                    {/* Similar products */}
+                    <section className='pt-10'>
+                        <h1 className='py-5 text-xl font-bold'>Similar Products</h1>
+                        <div className='flex flex-wrap space-y-3 space-x-3'>
+                            {mens_kurta.map((item)=><HomeSectionCard product={item}/>)}
+                        </div>
+                    </section>
 
             </div>
         </div>

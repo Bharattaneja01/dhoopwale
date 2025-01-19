@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import AliceCarousel from 'react-alice-carousel'
-import DhoopCard from '../DhoopCard/DhoopCard';
+import HomeSectionCard from '../HomeSectionCard/HomeSectionCard';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import { Button } from '@mui/material';
+import { mens_kurta } from '../../../Data/mens_kurta';
 
 const DhoopCarousel = () => {
 
@@ -19,7 +20,7 @@ const DhoopCarousel = () => {
 
     const syncActiveIndex=({item})=>setActiveIndex(item);
 
-    const items = [1, 1, 1, 1, 1,1,1,1,1,1].map((item) => <DhoopCard />)
+    const items = mens_kurta.map((item) => <HomeSectionCard product={item}/>)
     return (
         <div className='relative px-4 lg:px-8'>
             <div className='relative p-5 border'>
