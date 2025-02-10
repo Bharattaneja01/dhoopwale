@@ -50,7 +50,7 @@ const step=querySearch.get("step")
       {activeStep === steps.length ? (
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
+            All steps completed - you're finished
           </Typography>
           
         </React.Fragment>

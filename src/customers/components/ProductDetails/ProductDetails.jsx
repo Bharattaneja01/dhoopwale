@@ -1,7 +1,7 @@
 
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { Radio, RadioGroup } from '@headlessui/react'
 import Rating from '@mui/material/Rating';
@@ -9,7 +9,10 @@ import { Box, Button, Grid, LinearProgress } from '@mui/material';
 import ProductReviewCard from './ProductReviewCard';
 import { mens_kurta } from '../../../Data/mens_kurta';
 import HomeSectionCard from '../HomeSectionCard/HomeSectionCard';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { findProductsById } from '../../../State/Product/Action';
+import { addItemToCart } from '../../../State/Cart/Action';
 
 const product = {
     name: 'Basic Tee 6-Pack',
@@ -66,13 +69,25 @@ function classNames(...classes) {
 }
 
 export default function ProductDetails() {
-    const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-    const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+    const [selectedSize, setSelectedSize] = useState("");
     const navigate=useNavigate();
+    const params=useParams();
+    const dispatch=useDispatch();
+    const {products}=useSelector(store=>store);
+
+    console.log("----",params.productId);
 
     const handleAddToCart=()=>{
+        const data={productId:params.productId,size:selectedSize.name}
+        console.log("data :- ",data); 
+        dispatch(addItemToCart(data))
         navigate("/cart")
     }
+
+    useEffect(()=>{
+        const data={productId:params.productId}
+        dispatch(findProductsById(data))
+    },[params.productId])
 
     return (
         <div className="bg-white lg:px-20">
@@ -111,8 +126,8 @@ export default function ProductDetails() {
                     <div className="flex flex-col items-center">
                         <div className='rounded-lg max-w-[30rem] max-h-[35rem]'>
                             <img
-                                alt={product.images[0].alt}
-                                src={product.images[0].src}
+                                alt={products.product?.imageUrl}
+                                src={products.product?.imageUrl}
                                 className="hidden size-full rounded-lg object-cover lg:block"
                             />
                         </div>
@@ -131,8 +146,8 @@ export default function ProductDetails() {
                     {/* Product info */}
                     <div className="lg:col-span-0 max-auto max-w-2xl px-4 pb-16 sm:px-6 lg:max-w-2xl lg:px-8 lg:pb-24 items-start">
                         <div className="lg:col-span-2">
-                            <h1 className="text-lg font-semibold lg:text-xl text-gray-900">Universaloutfit</h1>
-                            <h1 className="text-lg lg:text-xl opacity-60 pt-1 text-gray-900">Casual Puff Sleeves Solid Women White Top</h1>
+                            <h1 className="text-lg font-semibold lg:text-xl text-gray-900">{products.product?.brand}</h1>
+                            <h1 className="text-lg lg:text-xl opacity-60 pt-1 text-gray-900">{products.product?.title}</h1>
                         </div>
 
                         {/* Options */}
@@ -140,9 +155,9 @@ export default function ProductDetails() {
                             <h2 className="sr-only">Product information</h2>
 
                             <div className='flex space-x-5 text-lg items-center lg:text-xl text-gray-900 mt-6'>
-                                <p className='font-semibold'>Rs.199</p>
-                                <p className='line-through opacity-50'>Rs.299</p>
-                                <p className='font-semibold text-green-600'>33% Off</p>
+                                <p className='font-semibold'>Rs.{products.product?.discountedPrice}</p>
+                                <p className='line-through opacity-50'>Rs.{products.product?.price}</p>
+                                <p className='font-semibold text-green-600'>{products.product?.discountPercent}%</p>
                             </div>
 
                             {/* Reviews */}

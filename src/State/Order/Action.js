@@ -15,7 +15,7 @@ export const createOrder=(reqData)=>async(dispatch)=>{
         };
 
         const {data}=await api.post(
-            `/api/orders`,
+            `/api/orders/`,
             reqData.address,
         );
         if(data.id){
@@ -35,7 +35,7 @@ export const createOrder=(reqData)=>async(dispatch)=>{
     }
 };
 
-export const getOrderById=(reqData)=>async(dispatch)=>{
+export const getOrderById=(orderId)=>async(dispatch)=>{
     dispatch({type:GET_ORDER_BY_ID_REQUEST});
     try {
         
