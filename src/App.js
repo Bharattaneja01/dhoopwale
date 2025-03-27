@@ -11,15 +11,16 @@ import Order from './customers/components/Order/Order';
 import OrderDetails from './customers/components/Order/OrderDetails';
 import { Route, Routes } from 'react-router-dom';
 import CustomerRouters from './Routers/CustomerRouters';
+import AdminRouters from './Routers/AdminRouters';
 
 function App() {
   return (
     <div className="App">
 
       <Routes>
-        <Route path='/*' element={<CustomerRouters />}>
-
-        </Route>
+        <Route path='/*' element={<CustomerRouters />}></Route>
+        <Route path='/admin/*' element={<AdminRouters/>}></Route>
+        
       </Routes>
       
       <div>
