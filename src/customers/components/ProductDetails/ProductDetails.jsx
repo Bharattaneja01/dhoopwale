@@ -7,7 +7,7 @@ import { Radio, RadioGroup } from '@headlessui/react'
 import Rating from '@mui/material/Rating';
 import { Box, Button, Grid, LinearProgress } from '@mui/material';
 import ProductReviewCard from './ProductReviewCard';
-import { mens_kurta } from '../../../Data/mens_kurta';
+import { mens_kurta } from '../../../Data/dhoop';
 import HomeSectionCard from '../HomeSectionCard/HomeSectionCard';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';

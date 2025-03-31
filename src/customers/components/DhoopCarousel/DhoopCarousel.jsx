@@ -3,7 +3,7 @@ import AliceCarousel from 'react-alice-carousel'
 import HomeSectionCard from '../HomeSectionCard/HomeSectionCard';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import { Button } from '@mui/material';
-import { mens_kurta } from '../../../Data/mens_kurta';
+import { mens_kurta } from '../../../Data/dhoop';
 
 const DhoopCarousel = () => {
 

@@ -68,7 +68,7 @@ const Footer = () => {
                     &copy;2025 My Company. All Rights Reserved
                 </Typography>
                 <Typography variant="body2" company='p' align='center'>
-                    Made withlove by me.
+                    Made with love by Bharat Taneja.
                 </Typography>
                 {/* <Typography variant="body2" company='p' align='center'>
                     Icons made by{' '}
